@@ -20,7 +20,7 @@
 - 실행하기
   - config파일 설정(yaml) : 파라미터 입력
     - yaml 파일은 그 해당 이름이 Unity의 Robot의 Behavior Parameters의 Behavior Name과 같아야한다.
-  - mlagents-learn config/trainer_config.yaml --run-id=RobotReacher00(아나콘다 프롬프트)
+  - mlagents-learn config/trainer_config.yaml --run-id=RobotArmRay3_00(아나콘다 프롬프트)
 
 ## Part5
 - Raycast Sensor 이용
