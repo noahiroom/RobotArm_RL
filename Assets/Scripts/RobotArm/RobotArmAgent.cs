@@ -48,34 +48,34 @@ public class RobotArmAgent : Agent
         m_RbA.angularVelocity = Vector3.zero;
 
         pendulumB.transform.position = new Vector3(-0.15f, 0.55f, 0f) + transform.position;
-        pendulumB.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+        pendulumB.transform.rotation = Quaternion.Euler(0f, -90f, 90f);
         m_RbB.velocity = Vector3.zero;
         m_RbB.angularVelocity = Vector3.zero;
 
-        pendulumC.transform.position = new Vector3(-0.15f, 1.375f, 0f) + transform.position;
+        pendulumC.transform.position = new Vector3(-0.97f, 0.55f, 0f) + transform.position;
         pendulumC.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
         m_RbC.velocity = Vector3.zero;
         m_RbC.angularVelocity = Vector3.zero;
 
-        pendulumD.transform.position = new Vector3(-0.15f, 1.375f, 0f) + transform.position;
+        pendulumD.transform.position = new Vector3(-0.97f, 0.55f, 0f) + transform.position;
         pendulumD.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
         m_RbD.velocity = Vector3.zero;
         m_RbD.angularVelocity = Vector3.zero;
 
-        pendulumE.transform.position = new Vector3(-0.15f, 2f, 0f) + transform.position;
-        pendulumE.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+        pendulumE.transform.position = new Vector3(-0.97f, 1.175f, 0f) + transform.position;
+        pendulumE.transform.rotation = Quaternion.Euler(0f, -90f, 90f);
         m_RbE.velocity = Vector3.zero;
         m_RbE.angularVelocity = Vector3.zero;
 
-        pendulumF.transform.position = new Vector3(-0.15f, 2.11f, 0f) + transform.position;
-        pendulumF.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+        pendulumF.transform.position = new Vector3(-1.08f, 1.175f, 0f) + transform.position;
+        pendulumF.transform.rotation = Quaternion.Euler(0f, -90f, 90f);
         m_RbF.velocity = Vector3.zero;
         m_RbF.angularVelocity = Vector3.zero;
 
         // 타겟 - 위치 세팅
         var posX = 2f - Random.value * 4f;
         var posZ = 2f - Random.value * 4f;
-        while ((Mathf.Pow(posX, 2) + Mathf.Pow(posZ, 2) > 2.5) || (Mathf.Pow(posX, 2) + Mathf.Pow(posZ, 2) < 0.7))
+        while ((Mathf.Pow(posX, 2) + Mathf.Pow(posZ, 2) > 3.5) || (Mathf.Pow(posX, 2) + Mathf.Pow(posZ, 2) < 0.7))
         {
             posX = 2f - Random.value * 4f;
             posZ = 2f - Random.value * 4f;
@@ -126,10 +126,10 @@ public class RobotArmAgent : Agent
         sensor.AddObservation(hand.transform.localPosition); //3
     }
 
-    public float speed = 40f;
+    public float speed = 5f;
     public override void OnActionReceived(float[] vectorAction)
     {
-        
+        /*
         // Continuous version 
         var torque = Mathf.Clamp(vectorAction[0], -1f, 1f) * 150f;
         m_RbA.AddTorque(new Vector3(0f, torque, 0f));
@@ -148,22 +148,26 @@ public class RobotArmAgent : Agent
 
         //torque = Mathf.Clamp(vectorAction[5], -1f, 1f) * 150f;
         //m_RbF.AddTorque(new Vector3(0f, torque, 0f));
-        
+        */
 
-        /*
+
         // Discrete version 
-        m_RbA.AddTorque(new Vector3(0f, vectorAction[0] * speed, 0f));
-        m_RbB.AddTorque(new Vector3(0f, 0f, vectorAction[1] * speed));
-        m_RbC.AddTorque(new Vector3(0f, 0f, vectorAction[2] * speed));
+        float r_RbA = vectorAction[0] <= 1 ? vectorAction[0] : -1; //vectorAction[0] == 0, 1, 2
+        float r_RbB = vectorAction[1] <= 1 ? vectorAction[1] : -1;
+        float r_RbC = vectorAction[2] <= 1 ? vectorAction[2] : -1;
+        m_RbA.AddTorque(new Vector3(0f, r_RbA * speed, 0f));
+        m_RbB.AddTorque(new Vector3(0f, 0f, r_RbB * speed));
+        m_RbC.AddTorque(new Vector3(0f, 0f, r_RbC * speed));
         //m_RbD.AddTorque(new Vector3(0f, vectorAction[3] * speed, 0f));
         //m_RbE.AddTorque(new Vector3(0f, 0f, vectorAction[4] * speed));
         //m_RbF.AddTorque(new Vector3(0f, vectorAction[5] * speed, 0f));
-        */
+        
     }
 
     public override void Heuristic(float[] actionsOut)
     {
         actionsOut[0] = Input.GetAxis("Vertical");
         actionsOut[1] = Input.GetAxis("Horizontal");
+        actionsOut[2] = Input.GetAxis("Fire1");
     }
 }
