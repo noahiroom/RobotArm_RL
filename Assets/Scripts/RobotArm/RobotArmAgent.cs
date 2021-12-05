@@ -75,13 +75,14 @@ public class RobotArmAgent : Agent
         // 타겟 - 위치 세팅
         var posX = 2f - Random.value * 4f;
         var posZ = 2f - Random.value * 4f;
-        while ((Mathf.Pow(posX, 2) + Mathf.Pow(posZ, 2) > 3.5) || (Mathf.Pow(posX, 2) + Mathf.Pow(posZ, 2) < 0.7))
+        var posY = Random.value + 0.1f;
+        while ((Mathf.Pow(posX, 2) + Mathf.Pow(posZ, 2) > 2) || (Mathf.Pow(posX, 2) + Mathf.Pow(posZ, 2) < 0.7))
         {
             posX = 2f - Random.value * 4f;
             posZ = 2f - Random.value * 4f;
         }
         //target.transform.position = new Vector3(posX, 0.1f - transform.position.y, posZ) + transform.position;
-        target.transform.localPosition = new Vector3(posX, 0.1f, posZ);
+        target.transform.localPosition = new Vector3(posX, posY, posZ);
 
 
     }
