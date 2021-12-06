@@ -27,5 +27,5 @@
   - hand부위에 Raycast Sensor 3D 붙이고
   - Target Tag 설정하기( Target Tag : Target box에 달아줌)
 
-## 데모
+## Results
 <img src="/RobotArm.JPG"  width="450" height="280">
