@@ -10,12 +10,12 @@
 - 박스위치 랜덤설정
 ## Part3
 - 로봇팔 scripts ML Agents 만들기
-  -  ReacherRobot.cs : 
+  -  ReacherArmAgent.cs : 
     - Initialize() : 각오브젝트의 rigid body 받기, Goal 정보 초기화
     - OnEpisodeBegin() : 에피소드가 시작할때 오브젝트 위치 초기화, Goal 정보 초기화, Goal 위치계산 업데이트
-    - CollectObservations() : 관찰하는 총 sensor 수 85 space size
-    - OnActionReceived : vectorAction - 각 joint 6개 의 움직임마다 업데이트, Goal 위치계산 업데이트
-  -  ReacherGoal.cs : Trigger가 Goal과 충돌했거나, 머무르거나, 나갔을때의 이벤트 설정
+    - CollectObservations() : 관찰하는 총 sensor 수 84 space size
+    - OnActionReceived : vectorAction - 각 joint 3개 의 움직임마다 업데이트, Goal 위치계산 업데이트
+  -  ReacherGoal.cs : Trigger가 Target과 충돌했거나, 머무르거나, 나갔을때의 이벤트 설정
 ## Part4
 - 실행하기
   - config파일 설정(yaml) : 파라미터 입력
